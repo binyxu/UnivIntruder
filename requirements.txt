@@ -1,0 +1,8 @@
+torch>=2.0.0
+torchvision>=0.15.1
+open_clip_torch
+pandas
+scipy
+tqdm
+pyparsing
+scikit-learn
