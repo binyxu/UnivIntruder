@@ -1,5 +1,5 @@
 
-# UnivIntruder Framework
+# Official Code for One Surrogate to Fool Them All: Universal, Transferable, and Targeted Adversarial Attacks with CLIP
 
 ## Overview
 Deep Neural Networks (DNNs) play critical roles in various high-stakes applications but are susceptible to adversarial and backdoor attacks. Traditional attack methods are becoming less effective as companies adopt more secure practices, such as closed-source data and black-box models. UnivIntruder, our novel framework, leverages universal transferable vulnerabilities without requiring direct access to the target models or datasets. It introduces a unique attack strategy called "task hijacking," utilizing textual concepts to induce misclassification across multiple networks. This paper explores the development and extensive evaluation of UnivIntruder across different DNN architectures and defensive mechanisms.
