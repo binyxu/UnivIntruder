@@ -101,7 +101,7 @@ python evaluate.py \
   --target 8 --eps 32 --image_size 224
 ```
 
-Replace ImageNet by CIFAR10, CIFAR100 or Caltech101 and use the matching checkpoint in samples/triggers/ to reproduce other rows.
+Replace `ImageNet` by `CIFAR10`, `CIFAR100` or `Caltech101` and use the matching checkpoint in `samples/triggers/` to reproduce other rows.
 
 ### Table 2 – Varying Target Class
 
