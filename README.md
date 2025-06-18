@@ -49,7 +49,7 @@ pip install -r requirements.txt          # includes robustbench
 
 ### 1  Training a Universal Perturbation
 
-replace /data/datasets with your custom dataset path
+replace `/data/datasets` with your custom dataset path
 
 ```bash
 python main.py \
@@ -149,7 +149,7 @@ python evaluate.py \
 
 ```bash
 python evaluate_robustness_c10.py \
-  --tgt_dataset CIFAR10 --data_path /home/datasets \
+  --tgt_dataset CIFAR10 --data_path /data/datasets \
   --ckpt samples/triggers/cifar10_32_255.pth \
   --target 8 --eps 32 --image_size 32
 ```
