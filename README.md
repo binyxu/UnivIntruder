@@ -1,8 +1,7 @@
 # UnivIntruder: One Surrogate to Fool Them All  
 ## Universal, Transferable, and Targeted Adversarial Attacks with CLIP
 
-Deep Neural Networks (DNNs) underpin many high-stakes systems yet remain vulnerable to *unseen* adversarial and backdoor threats.  
-**UnivIntruder** shows how **one** publicly-available vision-language model (CLIP) can be harnessed to create *universal*, *transferable* and *targeted* perturbations that hijack completely black-box models—no architecture, weights or data access required.
+Deep Neural Networks (DNNs) underpin many high-stakes systems yet remain vulnerable to *unseen* adversarial and backdoor threats.  **UnivIntruder** shows how **one** publicly-available vision-language model (CLIP) can be harnessed to create *universal*, *transferable* and *targeted* perturbations that hijack completely black-box models—no architecture, weights or data access required.
 
 <div align="center">
   <img src="assets/method.png" width="650"/>
@@ -171,5 +170,3 @@ python evaluate_robustness_c10.py \
 ---
 
 © 2025 UnivIntruder Authors — MIT License
-
-```
