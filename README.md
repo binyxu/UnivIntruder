@@ -1,5 +1,5 @@
 # UnivIntruder: One Surrogate to Fool Them All  
-## Universal, Transferable, and Targeted Adversarial Attacks with CLIP
+**Universal, Transferable, and Targeted Adversarial Attacks with CLIP**
 
 Deep Neural Networks (DNNs) underpin many high-stakes systems yet remain vulnerable to *unseen* adversarial and backdoor threats.  **UnivIntruder** shows how **one** publicly-available vision-language model (CLIP) can be harnessed to create *universal*, *transferable* and *targeted* perturbations that hijack completely black-box models—no architecture, weights or data access required.
 
@@ -149,10 +149,12 @@ python evaluate.py \
 
 ```bash
 python evaluate_robustness_c10.py \
-  --tgt_dataset CIFAR10 --data_path /data/datasets \
+  --data_path /data/datasets \
   --ckpt samples/triggers/cifar10_32_255.pth \
   --target 8 --eps 32 --image_size 32
 ```
+
+Make sure you install RobustBench before continuing. Use `evaluate_robustness_c100.py` or `evaluate_robustness_imagenet.py` together with the matching checkpoint in `samples/triggers/` to reproduce results in other datasets.
 
 ---
 
