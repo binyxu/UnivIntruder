@@ -12,7 +12,7 @@ from PIL import Image
 import torch.nn.functional as F
 from data_util import GetDatasetMeta, TransformedDataset, InMemoryDataset
 from model_util import TrainableAffineTransform, UniversalPerturbation, BackdoorEval, NoTargetDataset
-from loss_function.clip_loss import CLIPLoss
+from loss_function.loss_image_bind import ImageBindLoss
 import argparse
 
 
@@ -119,11 +119,10 @@ def main():
     optimizer = optim.Adam(trigger_model.parameters(), lr=0.01, weight_decay=1e-5)
 
     # Loss function
-    clip_loss_func = CLIPLoss(
+    clip_loss_func = ImageBindLoss(
         device,
-        lambda_direction=1,
-        clip_model='ViT-B-32',
-        pretrained='laion2b_s34b_b79k'
+        lambda_direction=1-naive,
+        lambda_naive=naive,
     )
     
     clip_loss_func.precompute_text_features(list(src_label_text_dict.values()), templates=src_data_meta.get_template())

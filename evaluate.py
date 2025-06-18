@@ -14,6 +14,7 @@ import pprint
 from data_util import GetDatasetMeta, InMemoryDataset
 from model_util import UniversalPerturbation, BackdoorEval, NoTargetDataset
 from utils.eval_path import imagenet_models, cifar10_models, cifar100_models
+import argparse
 
 
 def calculate_norm(dataset, trigger, image_size):
@@ -72,16 +73,31 @@ class ModelLoader:
         return model, name
 
 
+
+parser = argparse.ArgumentParser(description="UnivIntruder evaluation script with configurable hyperparameters")
+parser.add_argument('--device', default='cuda:0' if torch.cuda.is_available() else 'cpu')
+parser.add_argument('--target', type=int, default=8, help='Target class index')
+parser.add_argument('--eps', type=int, default=32, help='Perturbation budget in 1/255, e.g., 32 for 32/255')
+parser.add_argument('--batch_size', type=int, default=64, help='Batch size for training/evaluation')
+parser.add_argument('--image_size', type=int, default=32, help='Input image resolution')
+parser.add_argument('--data_path', default='/data/datasets', help='Root directory for datasets')
+parser.add_argument('--pood', default='TinyImageNet', help='Public out-of-distribution dataset name')
+parser.add_argument('--tgt_dataset', default='CIFAR10', help='Target dataset name')
+parser.add_argument('--max_step', type=int, default=3000, help='Maximum training steps')
+parser.add_argument('--ckpt', default='', help='Path to trigger checkpoint for evaluation')
+parser.add_argument('--split', type=int, default=1, help='Fraction to subsample evaluation set')
+args = parser.parse_args()
+
 def main():
     # Parameters
-    device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
-    target_class = 8
-    epsilon = 32/255
-    image_size = 32
-    ckpt = 'samples/triggers/cifar10_32_255.pth'
-    data_path = '/data/datasets'
-    tgt_dataset = 'CIFAR10'
-    split = 1
+    device = args.device
+    target_class = args.target
+    epsilon = args.eps/255
+    image_size = args.image_size
+    ckpt = args.ckpt
+    data_path = args.data_path
+    tgt_dataset = args.tgt_dataset
+    split = args.split
 
     tgt_data_meta = GetDatasetMeta(data_path, tgt_dataset)
     tgt_transform = tgt_data_meta.get_transformation()

@@ -6,3 +6,4 @@ scipy
 tqdm
 pyparsing
 scikit-learn
+robustbench
