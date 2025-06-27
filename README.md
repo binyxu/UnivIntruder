@@ -95,7 +95,6 @@ adv_img = (img + trigger).clamp(-1, 1)   # img ∈ [-1, 1]
 
 | Checkpoint Filename(s) | Experiment Purpose | Paper Table/Figure | Python Script(s) |
 |------------------------|--------------------|--------------------|------------------|
-| `cifar10_32_255.pth` | Standard evaluation with target class 8 | Table 2 | `evaluate.py` |
 | `cifar10_32_255_target_1.pth`<br>`cifar10_32_255_target_3.pth`<br>`cifar10_32_255_target_5.pth`<br>`cifar10_32_255_target_7.pth`<br>`cifar10_32_255_target_9.pth` | Evaluation with varying target classes | Table 2 | `evaluate.py` |
 | `cifar10_8_255.pth`<br>`cifar10_16_255.pth`<br>`cifar10_24_255.pth`<br>`cifar10_32_255.pth` | Varying perturbation budgets on CIFAR-10 | Figure 4 | `evaluate.py` |
 | `imagenet_32_255.pth`<br>`cifar10_32_255.pth`<br>`cifar100_32_255.pth`<br>`caltech101_32_255.pth` | Cross-model universal transferability | Table 3 | `evaluate.py` |
