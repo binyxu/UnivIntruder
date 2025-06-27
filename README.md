@@ -91,6 +91,18 @@ adv_img = (img + trigger).clamp(-1, 1)   # img ∈ [-1, 1]
 
 ## 🔁 Reproducing Paper Results
 
+### ✅ Checkpoint Groups and Corresponding Scripts
+
+| Checkpoint Filename(s) | Experiment Purpose | Paper Table/Figure | Python Script(s) |
+|------------------------|--------------------|--------------------|------------------|
+| `cifar10_32_255.pth` | Standard evaluation with target class 8 | Table 2 | `evaluate.py` |
+| `cifar10_32_255_target_1.pth`<br>`cifar10_32_255_target_3.pth`<br>`cifar10_32_255_target_5.pth`<br>`cifar10_32_255_target_7.pth`<br>`cifar10_32_255_target_9.pth` | Evaluation with varying target classes | Table 2 | `evaluate.py` |
+| `cifar10_8_255.pth`<br>`cifar10_16_255.pth`<br>`cifar10_24_255.pth`<br>`cifar10_32_255.pth` | Varying perturbation budgets on CIFAR-10 | Figure 4 | `evaluate.py` |
+| `imagenet_32_255.pth`<br>`cifar10_32_255.pth`<br>`cifar100_32_255.pth`<br>`caltech101_32_255.pth` | Cross-model universal transferability | Table 3 | `evaluate.py` |
+| `imagenet_32_255.pth`<br>`imagenet_32_255_siglip.pth`<br>`imagenet_32_255_imagebind.pth` | Comparison across different VLP surrogates (CLIP, SigLIP, ImageBind) | Table 7 | `evaluate.py`<br>`main_siglip.py`<br>`main_image_bind.py` |
+| `imagenet_16_255.pth`<br>`imagenet_32_255.pth`<br>`cifar100_24_255.pth`<br>`cifar100_32_255.pth` | Varying ε on ImageNet and CIFAR-100 | Figure 4 | `evaluate.py` |
+| `cifar10_32_255.pth`<br>`cifar100_32_255.pth`<br>`imagenet_32_255.pth` | Robust model evaluation (RobustBench) | Table 8 | `evaluate_robustness_c10.py`<br>`evaluate_robustness_c100.py`<br>`evaluate_robustness_imagenet.py` |
+
 ### Table 3 – Cross-model Transferability
 
 ```bash
