@@ -12,6 +12,7 @@ import random
 import torch.nn.functional as F
 import pprint
 from data_util import GetDatasetMeta, InMemoryDataset
+from transformers import AutoImageProcessor, AutoModelForImageClassification
 from model_util import UniversalPerturbation, BackdoorEval, NoTargetDataset
 from utils.eval_path import imagenet_models, cifar10_models, cifar100_models
 import argparse
@@ -36,6 +37,32 @@ def calculate_norm(dataset, trigger, image_size):
     mean = np.average(norms)
     var = np.var(norms)
     print(f"Mean l-inf norm: {mean:.4f}, Variance l-inf norm: {var:.4f}")
+    
+    
+class ViTModel(nn.Module):
+    def __init__(self, model_path, already_norm=None):
+        super(ViTModel, self).__init__()
+        # Load pre-trained model
+        self.model = AutoModelForImageClassification.from_pretrained(model_path)
+        processor = AutoImageProcessor.from_pretrained(model_path)
+        image_mean, image_std = processor.image_mean, processor.image_std
+        size = processor.size["height"]
+        predefined_mean, predefined_std = already_norm
+        predefined_mean = torch.tensor(predefined_mean)
+        predefined_std = torch.tensor(predefined_std)
+
+        self.normalize = transforms.Compose([
+            transforms.Resize(size),
+            transforms.Normalize(mean=-predefined_mean / predefined_std, std=1 / predefined_std),
+            transforms.Normalize(mean=image_mean, std=image_std),
+        ])
+    
+    def forward(self, x):
+        input_tensor = self.normalize(x)
+        with torch.no_grad():
+            outputs = self.model(pixel_values=input_tensor)
+        logits = outputs.logits
+        return logits
 
 
 class ModelLoader:
@@ -60,10 +87,16 @@ class ModelLoader:
             model = imagenet_models[index](pretrained=True)
         elif self.dataset == 'CIFAR10':
             name = cifar10_models[index]
-            model = torch.hub.load("chenyaofo/pytorch-cifar-models", name, pretrained=True)
+            if 'vit' in name or 'swin' in name:
+                model = ViTModel(name, [[0.4914, 0.4822, 0.4465], [0.2023, 0.1994, 0.2010]])
+            else:
+                model = torch.hub.load("chenyaofo/pytorch-cifar-models", name, pretrained=True)
         elif self.dataset == 'CIFAR100':
             name = cifar100_models[index]
-            model = torch.hub.load("chenyaofo/pytorch-cifar-models", name, pretrained=True)
+            if 'vit' not in name:
+                model = torch.hub.load("chenyaofo/pytorch-cifar-models", name, pretrained=True)
+            else:
+                model = ViTModel(name, [[0.5070751592371323, 0.48654887331495095, 0.4409178433670343], [0.2673342858792401, 0.2564384629170883, 0.27615047132568404]])
         else:
             raise ValueError("Invalid dataset. Please choose from 'ImageNet', 'CIFAR10', or 'CIFAR100'.")
         
@@ -98,6 +131,7 @@ def main():
     data_path = args.data_path
     tgt_dataset = args.tgt_dataset
     split = args.split
+    download = True
 
     tgt_data_meta = GetDatasetMeta(data_path, tgt_dataset)
     tgt_transform = tgt_data_meta.get_transformation()
@@ -116,8 +150,8 @@ def main():
         *tgt_transform.transforms,
     ])
 
-    test_set = tgt_data_meta.get_dataset(transform=transform)
-    pure_set = tgt_data_meta.get_dataset(transform=None) 
+    test_set = tgt_data_meta.get_dataset(transform=transform, download=download)
+    pure_set = tgt_data_meta.get_dataset(transform=None, download=download) 
     calculate_norm(pure_set, trigger_model, image_size)
 
     test_set = NoTargetDataset(test_set, target_class)
