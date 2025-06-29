@@ -78,6 +78,7 @@ def main():
     download = True
     simple_out = False
     top5 = True
+    naive = 0
     split = args.split
 
     transform = transforms.Compose([
