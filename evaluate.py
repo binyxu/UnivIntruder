@@ -135,7 +135,6 @@ def main():
 
     tgt_data_meta = GetDatasetMeta(data_path, tgt_dataset)
     tgt_transform = tgt_data_meta.get_transformation()
-    num_classes = len(tgt_data_meta.get_dataset_label_names())
 
     a = torch.load(ckpt)
     trigger_model = UniversalPerturbation((3, image_size, image_size), epsilon, initialization=a, device=device)
@@ -157,6 +156,8 @@ def main():
     test_set = NoTargetDataset(test_set, target_class)
     test_set, _ = torch.utils.data.random_split(test_set, [len(test_set)//split, len(test_set) - len(test_set)//split])
     test_set = InMemoryDataset([(X.detach().to('cpu'), y) for (X, y) in test_set])
+    
+    num_classes = len(tgt_data_meta.get_dataset_label_names())
 
     test_loader = DataLoader(test_set, batch_size=32, shuffle=False)
 
