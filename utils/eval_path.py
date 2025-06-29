@@ -16,6 +16,14 @@ cifar10_models = [
     'cifar10_mobilenetv2_x0_5', 'cifar10_mobilenetv2_x0_75', 'cifar10_mobilenetv2_x1_0', 'cifar10_mobilenetv2_x1_4',
     'cifar10_shufflenetv2_x0_5', 'cifar10_shufflenetv2_x1_0', 'cifar10_shufflenetv2_x1_5', 'cifar10_shufflenetv2_x2_0',
     'cifar10_repvgg_a0', 'cifar10_repvgg_a1', 'cifar10_repvgg_a2',
+    'binyxuCUHK/cifar10-vit-b-32',
+    'binyxuCUHK/cifar10-vit-b-16',
+    'binyxuCUHK/cifar10-vit-l-32',
+    'binyxuCUHK/cifar10-vit-l-16',
+    'binyxuCUHK/cifar10-swin-b',
+    'binyxuCUHK/cifar10-swin-l',
+    'binyxuCUHK/cifar10-swin-v2-b',
+    'binyxuCUHK/cifar10-swin-v2-l',
 ]
 
 cifar100_models = [
@@ -24,4 +32,12 @@ cifar100_models = [
     'cifar100_mobilenetv2_x0_5', 'cifar100_mobilenetv2_x0_75', 'cifar100_mobilenetv2_x1_0', 'cifar100_mobilenetv2_x1_4',
     'cifar100_shufflenetv2_x0_5', 'cifar100_shufflenetv2_x1_0', 'cifar100_shufflenetv2_x1_5', 'cifar100_shufflenetv2_x2_0',
     'cifar100_repvgg_a0', 'cifar100_repvgg_a1', 'cifar100_repvgg_a2',
+    'binyxuCUHK/cifar100-vit-b-32',
+    'binyxuCUHK/cifar100-vit-b-16',
+    'binyxuCUHK/cifar100-vit-l-32',
+    'binyxuCUHK/cifar100-vit-l-16',
+    'binyxuCUHK/cifar100-swin-b',
+    'binyxuCUHK/cifar100-swin-l',
+    'binyxuCUHK/cifar100-swin-v2-b',
+    'binyxuCUHK/cifar100-swin-v2-l',
 ]
