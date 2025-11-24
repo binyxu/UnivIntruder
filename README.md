@@ -172,12 +172,23 @@ Make sure you install RobustBench before continuing. Use `evaluate_robustness_c1
 ## 📜 Citation
 
 ```bibtex
-@inproceedings{xu2025univintruder,
-  title={One Surrogate to Fool Them All: Universal, Transferable, and Targeted Adversarial Attacks with CLIP},
-  author={Xu, Binyan and Dai, Xilin and Tang, Di and Zhang, Kehuan},
-  booktitle={Proceedings of the 2025 on ACM SIGSAC Conference on Computer and Communications Security},
-  year={2025}
+@inproceedings{10.1145/3719027.3744859,
+  author = {Xu, Binyan and Dai, Xilin and Tang, Di and Zhang, Kehuan},
+  title = {One Surrogate to Fool Them All: Universal, Transferable, and Targeted Adversarial Attacks with CLIP},
+  year = {2025},
+  isbn = {9798400715259},
+  publisher = {Association for Computing Machinery},
+  address = {New York, NY, USA},
+  url = {https://doi.org/10.1145/3719027.3744859},
+  doi = {10.1145/3719027.3744859},
+  booktitle = {Proceedings of the 2025 ACM SIGSAC Conference on Computer and Communications Security},
+  pages = {3087–3101},
+  numpages = {15},
+  keywords = {transferable adversarial attacks, universal adversarial attacks},
+  location = {Taipei, Taiwan},
+  series = {CCS '25}
 }
+
 ```
 
 ---
